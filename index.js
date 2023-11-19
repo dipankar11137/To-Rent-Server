@@ -25,7 +25,7 @@ async function run() {
     await client.connect();
     // console.log("database connect");
     const userCollection = client.db('toRent').collection('user');
-  
+    const flatCollection = client.db('toRent').collection('flats');
 
     //   // // // // // // // // // // // //
     //create and update a user
@@ -70,20 +70,20 @@ async function run() {
       res.send(user);
     });
 
-    //                    Jobs
-    // get Jobs
-    // app.get('/jobs', async (req, res) => {
-    //   const query = {};
-    //   const cursor = jobCollection.find(query);
-    //   const jobs = await cursor.toArray();
-    //   res.send(jobs);
-    // });
-    // // post Jobs
-    // app.post('/jobs', async (req, res) => {
-    //   const newProduct = req.body;
-    //   const result = await jobCollection.insertOne(newProduct);
-    //   res.send(result);
-    // });
+    //                    Flats
+    // get flats
+    app.get('/flats', async (req, res) => {
+      const query = {};
+      const cursor = flatCollection.find(query);
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+    // post Jobs
+    app.post('/jobs', async (req, res) => {
+      const newProduct = req.body;
+      const result = await jobCollection.insertOne(newProduct);
+      res.send(result);
+    });
     // // g
 
     // // //                        ALl services
