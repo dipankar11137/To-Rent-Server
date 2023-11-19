@@ -79,9 +79,16 @@ async function run() {
       res.send(result);
     });
     // post Jobs
-    app.post('/jobs', async (req, res) => {
-      const newProduct = req.body;
-      const result = await jobCollection.insertOne(newProduct);
+    app.post('/flats', async (req, res) => {
+      const newFlats = req.body;
+      const result = await flatCollection.insertOne(newFlats);
+      res.send(result);
+    });
+    // get one flat filter by id
+    app.get('/flat/:id', async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const result = await flatCollection.findOne(query);
       res.send(result);
     });
     // // g
