@@ -92,6 +92,14 @@ async function run() {
       const result = await flatCollection.findOne(query);
       res.send(result);
     });
+    // all service filter by service category
+    app.get('/allFlats/:category', async (req, res) => {
+      const category = req.params.category;
+      const query = { category };
+      const cursor = flatCollection.find(query);
+      const result = await cursor.toArray();
+      res.send(result);
+    });
 
     //                Book
     // post  book services
@@ -107,6 +115,7 @@ async function run() {
       const result = await cursor.toArray();
       res.send(result);
     });
+
     // // g
 
     // // //                        ALl services
