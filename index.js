@@ -26,6 +26,7 @@ async function run() {
     // console.log("database connect");
     const userCollection = client.db('toRent').collection('user');
     const flatCollection = client.db('toRent').collection('flats');
+    const bookFlatsCollection = client.db('toRent').collection('bookFlats');
 
     //   // // // // // // // // // // // //
     //create and update a user
@@ -89,6 +90,21 @@ async function run() {
       const id = req.params.id;
       const query = { _id: ObjectId(id) };
       const result = await flatCollection.findOne(query);
+      res.send(result);
+    });
+
+    //                Book
+    // post  book services
+    app.post('/bookFlats', async (req, res) => {
+      const newProduct = req.body;
+      const result = await bookFlatsCollection.insertOne(newProduct);
+      res.send(result);
+    });
+    // // get Book Service
+    app.get('/bookFlats', async (req, res) => {
+      const query = {};
+      const cursor = bookFlatsCollection.find(query);
+      const result = await cursor.toArray();
       res.send(result);
     });
     // // g
