@@ -93,7 +93,7 @@ async function run() {
       res.send(result);
     });
     // all service filter by service category
-    app.get('/allFlats/:category', async (req, res) => {
+    app.get('/flats/:category', async (req, res) => {
       const category = req.params.category;
       const query = { category };
       const cursor = flatCollection.find(query);
@@ -113,6 +113,13 @@ async function run() {
       const query = {};
       const cursor = bookFlatsCollection.find(query);
       const result = await cursor.toArray();
+      res.send(result);
+    });
+    // // Delete booking
+    app.delete('/bookFlats', async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const result = await bookFlatsCollection.deleteOne(query);
       res.send(result);
     });
 
