@@ -100,7 +100,13 @@ async function run() {
       const result = await cursor.toArray();
       res.send(result);
     });
-
+    // // Delete flats
+    app.delete('/flats/:id', async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const result = await flatCollection.deleteOne(query);
+      res.send(result);
+    });
     //                Book
     // post  book services
     app.post('/bookFlats', async (req, res) => {
@@ -116,7 +122,7 @@ async function run() {
       res.send(result);
     });
     // // Delete booking
-    app.delete('/bookFlats', async (req, res) => {
+    app.delete('/bookFlatsDelete/:id', async (req, res) => {
       const id = req.params.id;
       const query = { _id: ObjectId(id) };
       const result = await bookFlatsCollection.deleteOne(query);
