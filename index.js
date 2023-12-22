@@ -121,6 +121,14 @@ async function run() {
       const result = await cursor.toArray();
       res.send(result);
     });
+    // all service filter by service category
+    app.get('/review/:cId', async (req, res) => {
+      const cId = req.params.cId;
+      const query = { cId };
+      const cursor = reviewCollection.find(query);
+      const result = await cursor.toArray();
+      res.send(result);
+    });
     //                Book
     // post  book services
     app.post('/bookFlats', async (req, res) => {
@@ -133,6 +141,24 @@ async function run() {
       const query = {};
       const cursor = bookFlatsCollection.find(query);
       const result = await cursor.toArray();
+      res.send(result);
+    });
+    // update payment
+    app.put('/payment/:id', async (req, res) => {
+      const id = req.params.id;
+      const updatePayment = req.body;
+      const query = { _id: ObjectId(id) };
+      const options = { upsert: true };
+      const updateDoc = {
+        $set: {
+          payment: updatePayment.payment,
+        },
+      };
+      const result = await bookFlatsCollection.updateOne(
+        query,
+        updateDoc,
+        options
+      );
       res.send(result);
     });
     // // Delete booking
