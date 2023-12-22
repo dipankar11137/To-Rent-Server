@@ -114,6 +114,13 @@ async function run() {
       const result = await reviewCollection.insertOne(newFlats);
       res.send(result);
     });
+    // get Review
+    app.get('/reviews', async (req, res) => {
+      const query = {};
+      const cursor = reviewCollection.find(query);
+      const result = await cursor.toArray();
+      res.send(result);
+    });
     //                Book
     // post  book services
     app.post('/bookFlats', async (req, res) => {
