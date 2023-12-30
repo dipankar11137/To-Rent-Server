@@ -101,6 +101,14 @@ async function run() {
       const result = await cursor.toArray();
       res.send(result);
     });
+    // flats filter by email
+    app.get('/manageFlats/:email', async (req, res) => {
+      const email = req.params.email;
+      const query = { email };
+      const cursor = flatCollection.find(query);
+      const user = await cursor.toArray();
+      res.send(user);
+    });
     // // Delete flats
     app.delete('/flats/:id', async (req, res) => {
       const id = req.params.id;
@@ -135,6 +143,14 @@ async function run() {
       const newProduct = req.body;
       const result = await bookFlatsCollection.insertOne(newProduct);
       res.send(result);
+    });
+    // get user by email
+    app.get('/bookFlat/:email', async (req, res) => {
+      const email = req.params.email;
+      const query = { email };
+      const cursor = bookFlatsCollection.find(query);
+      const user = await cursor.toArray();
+      res.send(user);
     });
     // // get Book Service
     app.get('/bookFlats', async (req, res) => {
