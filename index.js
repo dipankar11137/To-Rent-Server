@@ -10,8 +10,11 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
+// const uri =
+//   'mongodb+srv://to_rent:cQT6E9NISbgPDFeV@cluster0.c4hbjgx.mongodb.net/?retryWrites=true&w=majority';
+
 const uri =
-  'mongodb+srv://to_rent:cQT6E9NISbgPDFeV@cluster0.c4hbjgx.mongodb.net/?retryWrites=true&w=majority';
+  'mongodb+srv://sajidur1513694:niAgLbxoc3QSwzct@cluster0.a25sbp7.mongodb.net/?retryWrites=true&w=majority';
 
 
 const client = new MongoClient(uri, {
